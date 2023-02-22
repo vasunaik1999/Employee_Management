@@ -20,15 +20,18 @@
                         @csrf
                         <div class="mb-6">
                             <label for="task_brief" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task Brief</label>
-                            <input type="task_brief" name="task_brief" id="task_brief" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Task Brief..." required>
+                            <input type="task_brief" name="task_brief" id="task_brief" value="{{old('task_brief')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Task Brief..." required>
+                            @error('task_brief') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-6">
                             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Description</label>
-                            <textarea id="description" name="description" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter what work/task you have done..." required></textarea>
+                            <textarea id="description" name="description" rows="10"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter what work/task you have done..." required>{{old('description')}} </textarea>
+                            @error('description') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-6">
                             <label for="keypoints" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keypoints (If Any)</label>
-                            <textarea id="keypoints" name="keypoints" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Important/Key Points..."></textarea>
+                            <textarea id="keypoints" name="keypoints" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Important/Key Points...">{{old('keypoints')}} </textarea>
+                            @error('keypoints') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-6">
                             <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date (Task date)</label>
@@ -38,7 +41,8 @@
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" required>
+                                <input datepicker datepicker-format="yyyy/mm/dd" type="text" name="date" value="{{old('date')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" required>
+                                @error('date') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
