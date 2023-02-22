@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Routes for SUPERADMIN for DASHBOARD
-Route::middleware(['auth', 'role:superadmin'])->name('dashboard.')->prefix('dashboard')->group(function() {
+Route::middleware(['auth', 'role:superadmin'])->name('dashboard.')->prefix('dashboard')->group(function () {
     //Routes for Roles & PERMISSIONS Display|ADD|EDIT|DELETE
     Route::resource('/roles', RoleController::class);
     Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permissions');
@@ -42,11 +42,11 @@ Route::middleware(['auth', 'role:superadmin'])->name('dashboard.')->prefix('dash
     Route::resource('/permissions', PermissionController::class);
     Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.roles');
     Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
-    
+
     //Routes for USERS 
-    Route::get('/users',[UserController::class, 'index'])->name('users.index'); //Display users
+    Route::get('/users', [UserController::class, 'index'])->name('users.index'); //Display users
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show'); //Display roles n permissions of user
-    Route::delete('/users/{user}',[UserController::class, 'destroy'])->name('users.destroy'); //Delete User
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy'); //Delete User
     Route::post('/users/{user}/roles', [UserController::class, 'assignRole'])->name('users.roles'); //Assign ROle to user
     Route::delete('/users/{user}/roles/{role}', [UserController::class, 'removeRole'])->name('users.roles.remove'); //Remove role of user
     Route::post('/users/{user}/permissions', [UserController::class, 'givePermission'])->name('users.permissions'); //Give permission to user
@@ -54,11 +54,16 @@ Route::middleware(['auth', 'role:superadmin'])->name('dashboard.')->prefix('dash
 });
 
 //Routes for ADMIN / SUPERADMIN for DASHBOARD
-Route::middleware(['auth', 'role:admin|superadmin'])->name('dashboard.')->prefix('dashboard')->group(function() {
+Route::middleware(['auth', 'role:admin|superadmin'])->name('dashboard.')->prefix('dashboard')->group(function () {
+    //Check Daily Updates
+    Route::get('/daily-updates/check', [DailyUpdateController::class, 'check_index'])->name('daily-updates.check-index');
+    Route::get('/daily-updates/check/{user}/show', [DailyUpdateController::class, 'check_show'])->name('daily-updates.check-show');
+    Route::get('/daily-updates/check/{dailyUpdate}/verify', [DailyUpdateController::class, 'check_verify'])->name('daily-updates.check-verify');
+    Route::put('/daily-updates/check/{dailyUpdate}/verify/update', [DailyUpdateController::class, 'check_update'])->name('daily-updates.check-update');
 });
 
 //Routes for USER / ADMIN / SUPERADMIN for DASHBOARD
-Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->prefix('dashboard')->group(function() {
+Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     //Daily Updates
@@ -67,9 +72,9 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::post('/daily-updates/store', [DailyUpdateController::class, 'store'])->name('daily-updates.store');
     Route::get('/daily-updates/{dailyUpdate}/edit', [DailyUpdateController::class, 'edit'])->name('daily-updates.edit');
     Route::put('/daily-updates/{dailyUpdate}/update', [DailyUpdateController::class, 'update'])->name('daily-updates.update');
+    Route::get('/daily-updates/{dailyUpdate}/show', [DailyUpdateController::class, 'show'])->name('daily-updates.show');
     Route::delete('/daily-updates/{dailyUpdate}/destroy', [DailyUpdateController::class, 'destroy'])->name('daily-updates.destroy');
-
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

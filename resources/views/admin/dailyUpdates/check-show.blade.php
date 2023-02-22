@@ -6,14 +6,13 @@
                 <div class="block p-4 bg-slate-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="grid grid-cols-2 ">
                         <div class="flex justify-start">
-                            <h1 class="text-xl">My Daily Updates</h1>
+                            <h1 class="text-xl">Daily Updates
+                                <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300">{{$user->name}}</span>
+                            </h1>
                         </div>
-                        <div class="flex justify-end">
-                            <a href="{{ route('dashboard.daily-updates.create') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"><i class="fa-solid fa-list-check mr-2"></i> Add Update</a>
-                            <!-- @role('superadmin|admin')
-                            <a href="{{ route('dashboard.daily-updates.check-index') }}" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"><i class="fa-regular fa-circle-check mr-2"></i> Check Updates</a>
-                            @endrole -->
-                        </div>
+                        <!-- <div class="flex justify-end">
+                            <a href="{{ route('dashboard.daily-updates.check-index') }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"><i class="fa-solid fa-left-long mr-2"></i> Back</a>
+                        </div> -->
                     </div>
                 </div>
 
@@ -28,12 +27,20 @@
                                 Dashboard
                             </a>
                         </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <a href="{{ route('dashboard.daily-updates.check-index') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Check Updates</a>
+                            </div>
+                        </li>
                         <li aria-current="page">
                             <div class="flex items-center">
                                 <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Daily Updates</span>
+                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Updates</span>
                             </div>
                         </li>
                     </ol>
@@ -91,6 +98,7 @@
                                     </td>
                                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
                                         <div class="flex space-x-2">
+                                            <a href="{{ route('dashboard.daily-updates.check-verify', $dailyUpdate->id) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg px-3 py-2 text-center mr-1 mb-2"><i class="fa-solid fa-calendar-check"></i></a>
                                             <a href="{{ route('dashboard.daily-updates.edit', $dailyUpdate->id) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg px-3 py-2 text-center mr-1 mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ route('dashboard.daily-updates.show', $dailyUpdate->id) }}" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2"><i class="fa-solid fa-circle-info"></i></a>
                                             <form method="POST" action="{{ route('dashboard.daily-updates.destroy', $dailyUpdate->id) }}" onsubmit="return confirm('Are you sure?');" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2">
