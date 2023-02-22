@@ -72,6 +72,9 @@
                 @role('superadmin|admin')
                 <x-nav-link :href="route('dashboard.daily-updates.check-index')" :active="request()->routeIs('dashboard.daily-updates.check-index') || request()->routeIs('dashboard.daily-updates.check-show') || request()->routeIs('dashboard.daily-updates.check-verify')"><i class="fa-solid fa-file-circle-check mr-2"></i> Check Updates</x-nav-link>
                 @endrole
+                <!-- Categories -->
+                <x-nav-link :href="route('dashboard.category.index')" :active="request()->routeIs('dashboard.category.index') || request()->routeIs('dashboard.category.create') || request()->routeIs('dashboard.category.edit')"><i class="fa-solid fa-layer-group mr-2"></i> Categories</x-nav-link>
+                <x-nav-link :href="route('dashboard.notes.index')" :active="request()->routeIs('dashboard.notes.index') || request()->routeIs('dashboard.notes.create') || request()->routeIs('dashboard.notes.edit')"><i class="fa-solid fa-note-sticky mr-2"></i> Notes</x-nav-link>
                 @role('superadmin')
                 <x-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.index') || request()->routeIs('dashboard.roles.edit') || request()->routeIs('dashboard.roles.create')"><i class="fa-solid fa-address-book mr-2"></i> Roles</x-nav-link>
                 <x-nav-link :href="route('dashboard.permissions.index')" :active="request()->routeIs('dashboard.permissions.index') || request()->routeIs('dashboard.permissions.edit') || request()->routeIs('dashboard.permissions.create')"><i class="fa-solid fa-file-prescription mr-2"></i> Permissions</x-nav-link>

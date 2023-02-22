@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DailyUpdateController;
+use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +76,23 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::put('/daily-updates/{dailyUpdate}/update', [DailyUpdateController::class, 'update'])->name('daily-updates.update');
     Route::get('/daily-updates/{dailyUpdate}/show', [DailyUpdateController::class, 'show'])->name('daily-updates.show');
     Route::delete('/daily-updates/{dailyUpdate}/destroy', [DailyUpdateController::class, 'destroy'])->name('daily-updates.destroy');
+
+    // Category routes
+    Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+    
+    // NOtes routes
+    Route::get('/notes', [NotesController::class, 'index'])->name('notes.index');
+    Route::get('/notes/create', [NotesController::class, 'create'])->name('notes.create');
+    Route::post('/notes/store', [NotesController::class, 'store'])->name('notes.store');
+    Route::get('/notes/{note}/edit', [NotesController::class, 'edit'])->name('notes.edit');
+    Route::put('/notes/{note}/update', [NotesController::class, 'update'])->name('notes.update');
+    Route::delete('/notes/{note}/destroy', [NotesController::class, 'destroy'])->name('notes.destroy');
+    
 });
 
 

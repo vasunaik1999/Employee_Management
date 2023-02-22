@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\DailyUpdate;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,10 +38,12 @@ class DashboardController extends Controller
 
         $totalRoles=Role::all()->count();
         $totalPermissions = Permission::all()->count();
+
+        $myCategories = Category::where('user_id','=',Auth::user()->id)->get()->count();
         // dd($totalRoles, $totalPermissions);
 
         // dd($totalUsers, $totalAdmins, $totalSuperadmins);
 
-        return view('admin.dashboard', compact('myUpdates', 'totalUsers', 'totalAdmins', 'totalSuperadmins', 'totalRoles', 'totalPermissions'));
+        return view('admin.dashboard', compact('myUpdates', 'totalUsers', 'totalAdmins', 'totalSuperadmins', 'totalRoles', 'totalPermissions', 'myCategories'));
     }
 }
