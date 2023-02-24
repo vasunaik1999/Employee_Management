@@ -63,14 +63,20 @@
                                     </th>
                                     <td class="px-6 py-4">
                                         {{$note->topic}}
+                                        <br>
+                                        <?php $tags = App\Models\Tag::where('notes_id', '=', $note->id)->get(); ?>
+                                        @foreach($tags as $tag)
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400"><i class="fa-solid fa-hashtag mr-2"></i> {{$tag->tag_name}}</span>
+                                        @endforeach
                                     </td>
                                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                                        {{$note->category_id}}
+                                        {{$note->name}}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex space-x-2">
                                             <a href="{{ route('dashboard.notes.edit', $note->id) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg px-3 py-2 text-center mr-1 mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ route('dashboard.notes.show', $note->id) }}" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2"><i class="fa-solid fa-circle-info"></i></a>
+                                            <a href="{{ route('dashboard.notes.tags.index', $note->id) }}" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"><i class="fa-solid fa-tags"></i></a>
                                             <form method="POST" action="{{ route('dashboard.notes.destroy', $note->id) }}" onsubmit="return confirm('Are you sure?');" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2">
                                                 @csrf
                                                 @method('DELETE')
@@ -91,9 +97,9 @@
 
     @push('bottom-scripts')
     <script>
-            $(document).ready(function () {
-                $('#dataTable').DataTable();
-            });
-        </script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
     @endpush
 </x-app-layout>

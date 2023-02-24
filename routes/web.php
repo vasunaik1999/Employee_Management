@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DailyUpdateController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +94,11 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::put('/notes/{notes}/update', [NotesController::class, 'update'])->name('notes.update');
     Route::get('/notes/{notes}/show', [NotesController::class, 'show'])->name('notes.show');
     Route::delete('/notes/{notes}/destroy', [NotesController::class, 'destroy'])->name('notes.destroy');
+
+    //Tags
+    Route::get('/notes/{notes}/tags', [TagController::class, 'index'])->name('notes.tags.index');
+    Route::post('/notes/{notes}/tags/store', [TagController::class, 'store'])->name('notes.tags.store');
+    Route::delete('/notes/tags/{tag}/destroy', [TagController::class, 'destroy'])->name('notes.tags.destroy');
     
 });
 
