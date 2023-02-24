@@ -42,8 +42,8 @@
                 <!-- Display tasks -->
                 <div class="block p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="dataTable">
                             <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
@@ -110,4 +110,11 @@
             </div>
         </div>
     </div>
+    @push('bottom-scripts')
+    <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });
+        </script>
+    @endpush
 </x-app-layout>

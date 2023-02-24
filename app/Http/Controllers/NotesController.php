@@ -16,7 +16,8 @@ class NotesController extends Controller
      */
     public function index()
     {
-        return view('admin.notes.index');
+        $notes = Notes::where('user_id','=',Auth::user()->id)->orderBy('id', 'DESC')->get();
+        return view('admin.notes.index',compact('notes'));
     }
 
     /**
@@ -38,7 +39,20 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $validated = $request->validate([
+            'topic' => ['required', 'min:4'],
+            'notes' => ['required'],
+            'category_id' => 'required',
+        ]);
+
+        $note = new Notes();
+        $note->topic = $request->topic;
+        $note->notes = $request->notes;
+        $note->category_id = $request->category_id;
+        $note->user_id = auth()->user()->id;
+        
+        $note->save();
+        return to_route('dashboard.notes.index')->with('message', 'Notes created Sucessfully!');
     }
 
     /**
@@ -49,7 +63,8 @@ class NotesController extends Controller
      */
     public function show(Notes $notes)
     {
-        //
+        $category = Category::where('id','=',$notes->category_id)->first();
+        return view('admin.notes.show',compact('notes','category'));
     }
 
     /**
@@ -60,7 +75,10 @@ class NotesController extends Controller
      */
     public function edit(Notes $notes)
     {
-        //
+        $categories = Category::where('user_id','=',Auth::user()->id)->get();
+        $cat = Category::where('id','=',$notes->category_id)->first();
+        // dd($cat);
+        return view('admin.notes.edit', compact('categories','cat','notes'));
     }
 
     /**
@@ -83,6 +101,7 @@ class NotesController extends Controller
      */
     public function destroy(Notes $notes)
     {
-        //
+        $notes->delete();
+        return back()->with('message', 'Notes Deleted Sucessfully!');
     }
 }

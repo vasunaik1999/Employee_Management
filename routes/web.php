@@ -89,9 +89,10 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::get('/notes', [NotesController::class, 'index'])->name('notes.index');
     Route::get('/notes/create', [NotesController::class, 'create'])->name('notes.create');
     Route::post('/notes/store', [NotesController::class, 'store'])->name('notes.store');
-    Route::get('/notes/{note}/edit', [NotesController::class, 'edit'])->name('notes.edit');
-    Route::put('/notes/{note}/update', [NotesController::class, 'update'])->name('notes.update');
-    Route::delete('/notes/{note}/destroy', [NotesController::class, 'destroy'])->name('notes.destroy');
+    Route::get('/notes/{notes}/edit', [NotesController::class, 'edit'])->name('notes.edit');
+    Route::put('/notes/{notes}/update', [NotesController::class, 'update'])->name('notes.update');
+    Route::get('/notes/{notes}/show', [NotesController::class, 'show'])->name('notes.show');
+    Route::delete('/notes/{notes}/destroy', [NotesController::class, 'destroy'])->name('notes.destroy');
     
 });
 

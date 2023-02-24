@@ -6,7 +6,7 @@
                 <div class="block p-4 bg-slate-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="grid grid-cols-2 ">
                         <div class="flex justify-start">
-                            <h1 class="text-2xl">Create Notes</h1>
+                            <h1 class="text-2xl">Edit Notes</h1>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                                 <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Create Notes</span>
+                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">Edit Notes</span>
                             </div>
                         </li>
                     </ol>
@@ -43,18 +43,18 @@
 
                 <!-- form -->
                 <div class="block p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-                    <form method="POST" action="{{ route('dashboard.notes.store') }}">
+                    <form method="POST" action="{{ route('dashboard.notes.update', $notes->id) }}">
                         @csrf
+                        @method('PUT')
                         <div class="mb-6">
                             <label for="topic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes Topic</label>
-                            <input type="topic" name="topic" id="topic" value="{{old('topic')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Notes topic..." required>
+                            <input type="topic" name="topic" id="topic" value="{{$notes->topic}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Notes topic..." required>
                             @error('topic') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-6">
                             <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                             <select id="category_id" name="category_id" class="max-w-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                                <option value="">-- SELECT CATEGORY --</option>
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -63,18 +63,18 @@
                         </div>
                         <div class="mb-6">
                             <label for="notes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
-                            <textarea id="notes" name="notes" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Important/Key Points...">{{old('notes')}} </textarea>
+                            <textarea id="notes" name="notes" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Important/Key Points...">{{$notes->notes}} </textarea>
                             @error('notes') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     @push('bottom-scripts')
-     <!-- Text editor for Notes -->
-     <script>
+    <!-- Text editor for Notes -->
+    <script>
         tinymce.init({
             selector: 'textarea#notes', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'code table lists',

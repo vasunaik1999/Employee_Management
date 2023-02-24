@@ -35,6 +35,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2">
+                                <div class="bg-sky-600 border rounded shadow p-2">
+                                    <div class="flex flex-row items-center">
+                                        <div class="flex-shrink pl-1 pr-4"><i class="fa-solid fa-note-sticky fa-2x fa-fw text-white"></i></div>
+                                        <div class="flex-1 text-right">
+                                            <h5 class="text-white">My Note</h5>
+                                            <h3 class="text-white text-3xl">{{$myNotes}} <span class="text-sky-400"><i class="fas fa-caret-up"></i></span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

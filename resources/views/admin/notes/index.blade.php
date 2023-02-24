@@ -2,7 +2,6 @@
     <div class="py-12 w-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-2">
-
                 <div class="block p-4 bg-slate-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="grid grid-cols-2 ">
                         <div class="flex justify-start">
@@ -13,7 +12,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Breadcrumb -->
                 <nav class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -39,8 +37,8 @@
                 <!-- Display Notes -->
                 <div class="block p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="dataTable">
                             <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
@@ -58,7 +56,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach($notes as $key => $note)
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                        {{$key + 1}}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{$note->topic}}
+                                    </td>
+                                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                                        {{$note->category_id}}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex space-x-2">
+                                            <a href="{{ route('dashboard.notes.edit', $note->id) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg px-3 py-2 text-center mr-1 mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{{ route('dashboard.notes.show', $note->id) }}" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2"><i class="fa-solid fa-circle-info"></i></a>
+                                            <form method="POST" action="{{ route('dashboard.notes.destroy', $note->id) }}" onsubmit="return confirm('Are you sure?');" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg px-3 py-2 text-center mr-2 mb-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -67,4 +88,12 @@
             </div>
         </div>
     </div>
+
+    @push('bottom-scripts')
+    <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });
+        </script>
+    @endpush
 </x-app-layout>

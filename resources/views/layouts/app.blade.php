@@ -18,6 +18,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -74,7 +77,7 @@
                 @endrole
                 <!-- Categories -->
                 <x-nav-link :href="route('dashboard.category.index')" :active="request()->routeIs('dashboard.category.index') || request()->routeIs('dashboard.category.create') || request()->routeIs('dashboard.category.edit')"><i class="fa-solid fa-layer-group mr-2"></i> Categories</x-nav-link>
-                <x-nav-link :href="route('dashboard.notes.index')" :active="request()->routeIs('dashboard.notes.index') || request()->routeIs('dashboard.notes.create') || request()->routeIs('dashboard.notes.edit')"><i class="fa-solid fa-note-sticky mr-2"></i> Notes</x-nav-link>
+                <x-nav-link :href="route('dashboard.notes.index')" :active="request()->routeIs('dashboard.notes.index') || request()->routeIs('dashboard.notes.create') || request()->routeIs('dashboard.notes.edit')  || request()->routeIs('dashboard.notes.show')"><i class="fa-solid fa-note-sticky mr-2"></i> Notes</x-nav-link>
                 @role('superadmin')
                 <x-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.index') || request()->routeIs('dashboard.roles.edit') || request()->routeIs('dashboard.roles.create')"><i class="fa-solid fa-address-book mr-2"></i> Roles</x-nav-link>
                 <x-nav-link :href="route('dashboard.permissions.index')" :active="request()->routeIs('dashboard.permissions.index') || request()->routeIs('dashboard.permissions.edit') || request()->routeIs('dashboard.permissions.create')"><i class="fa-solid fa-file-prescription mr-2"></i> Permissions</x-nav-link>
@@ -123,6 +126,10 @@
     <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
     <script src="https://cdn.tiny.cloud/1/q99axkzg9gn6f99cal8bh17fpqnm3awzofe7wtq31drzooiy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+    <!-- Datatable -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    
     @stack('bottom-scripts')
 </body>
 
