@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Route::get('/dashboard', function () {
@@ -46,7 +46,7 @@ Route::middleware(['auth', 'role:superadmin'])->name('dashboard.')->prefix('dash
     Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.roles');
     Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
 
-    //Routes for USERS 
+    //Routes for USERS
     Route::get('/users', [UserController::class, 'index'])->name('users.index'); //Display users
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show'); //Display roles n permissions of user
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy'); //Delete User
@@ -85,7 +85,7 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
-    
+
     // NOtes routes
     Route::get('/notes', [NotesController::class, 'index'])->name('notes.index');
     Route::get('/notes/create', [NotesController::class, 'create'])->name('notes.create');
@@ -99,7 +99,7 @@ Route::middleware(['auth', 'role:user|admin|superadmin'])->name('dashboard.')->p
     Route::get('/notes/{notes}/tags', [TagController::class, 'index'])->name('notes.tags.index');
     Route::post('/notes/{notes}/tags/store', [TagController::class, 'store'])->name('notes.tags.store');
     Route::delete('/notes/tags/{tag}/destroy', [TagController::class, 'destroy'])->name('notes.tags.destroy');
-    
+
 });
 
 
